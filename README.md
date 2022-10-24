@@ -28,7 +28,7 @@ yarn cap sync
 
 <docgen-index>
 
-* [`addListener(...)`](#addlistener)
+* [`addListener('discover', ...)`](#addlistenerdiscover)
 * [`getHostname()`](#gethostname)
 * [`register(...)`](#register)
 * [`unregister(...)`](#unregister)
@@ -37,22 +37,23 @@ yarn cap sync
 * [`unwatch(...)`](#unwatch)
 * [`close()`](#close)
 * [Interfaces](#interfaces)
+* [Type Aliases](#type-aliases)
 
 </docgen-index>
 
 <docgen-api>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
 
-### addListener(...)
+### addListener('discover', ...)
 
 ```typescript
 addListener(eventName: 'discover', listenerFunc: (result: ZeroConfWatchResult) => void) => PluginListenerHandle
 ```
 
-| Param              | Type                                                  |
-| ------------------ | ----------------------------------------------------- |
-| **`eventName`**    | <code>"discover"</code>                               |
-| **`listenerFunc`** | <code>(result: ZeroConfWatchResult) =&gt; void</code> |
+| Param              | Type                                                                                     |
+| ------------------ | ---------------------------------------------------------------------------------------- |
+| **`eventName`**    | <code>'discover'</code>                                                                  |
+| **`listenerFunc`** | <code>(result: <a href="#zeroconfwatchresult">ZeroConfWatchResult</a>) =&gt; void</code> |
 
 **Returns:** <code><a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
 
@@ -111,10 +112,10 @@ stop() => Promise<void>
 watch(request: ZeroConfWatchRequest, callback?: ZeroConfWatchCallback | undefined) => Promise<CallbackID>
 ```
 
-| Param          | Type                                                                  |
-| -------------- | --------------------------------------------------------------------- |
-| **`request`**  | <code><a href="#zeroconfwatchrequest">ZeroConfWatchRequest</a></code> |
-| **`callback`** | <code>ZeroConfWatchCallback</code>                                    |
+| Param          | Type                                                                    |
+| -------------- | ----------------------------------------------------------------------- |
+| **`request`**  | <code><a href="#zeroconfwatchrequest">ZeroConfWatchRequest</a></code>   |
+| **`callback`** | <code><a href="#zeroconfwatchcallback">ZeroConfWatchCallback</a></code> |
 
 **Returns:** <code>Promise&lt;string&gt;</code>
 
@@ -153,6 +154,20 @@ close() => Promise<void>
 | **`remove`** | <code>() =&gt; Promise&lt;void&gt;</code> |
 
 
+#### ZeroConfService
+
+| Prop                | Type                                    |
+| ------------------- | --------------------------------------- |
+| **`domain`**        | <code>string</code>                     |
+| **`type`**          | <code>string</code>                     |
+| **`name`**          | <code>string</code>                     |
+| **`port`**          | <code>number</code>                     |
+| **`hostname`**      | <code>string</code>                     |
+| **`ipv4Addresses`** | <code>string[]</code>                   |
+| **`ipv6Addresses`** | <code>string[]</code>                   |
+| **`txtRecord`**     | <code>{ [key: string]: string; }</code> |
+
+
 #### ZeroConfRegisterRequest
 
 | Prop        | Type                                    |
@@ -174,5 +189,33 @@ close() => Promise<void>
 | ------------ | ------------------- |
 | **`type`**   | <code>string</code> |
 | **`domain`** | <code>string</code> |
+
+
+### Type Aliases
+
+
+#### ZeroConfWatchResult
+
+<code>{ action: <a href="#zeroconfwatchaction">ZeroConfWatchAction</a>; service: <a href="#zeroconfservice">ZeroConfService</a>; }</code>
+
+
+#### ZeroConfWatchAction
+
+<code>'added' | 'removed' | 'resolved'</code>
+
+
+#### ZeroConfWatchCallback
+
+<code>(event: <a href="#zeroconfwatchresult">ZeroConfWatchResult</a>): void</code>
+
+
+#### CallbackID
+
+<code>string</code>
+
+
+#### ZeroConfUnwatchRequest
+
+<code><a href="#zeroconfwatchrequest">ZeroConfWatchRequest</a></code>
 
 </docgen-api>
