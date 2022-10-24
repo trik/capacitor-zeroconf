@@ -16,8 +16,7 @@ import type {
 
 let callbackId = 0;
 
-const bonjour = ((bonjourMod as any).default ||
-  bonjourMod) as typeof bonjourMod;
+const bonjour = ((bonjourMod as any).default || bonjourMod) as typeof bonjourMod;
 
 const bonjourToZeroConfService = (service: RemoteService): ZeroConfService => ({
   domain: service.host,
@@ -46,10 +45,7 @@ export class ZeroConf extends EventEmitter implements ZeroConfPlugin {
     this._bonjour = bonjour();
   }
 
-  addListener(
-    eventName: string | symbol,
-    listener: (...args: any[]) => void,
-  ): any {
+  addListener(eventName: string | symbol, listener: (...args: any[]) => void): any {
     super.addListener(eventName, listener);
     const id = listenerId++;
     this.listenersMap.set(id, listener);
@@ -78,59 +74,48 @@ export class ZeroConf extends EventEmitter implements ZeroConfPlugin {
     return Promise.resolve();
   }
   unregister(request: ZeroConfUnregisterRequest): Promise<void> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       const serviceIdx = this._services.findIndex(
-        service =>
-          service.name === request.name &&
-          service.type === request.type &&
-          service.fqdn == request.domain,
+        (service) => service.name === request.name && service.type === request.type && service.fqdn == request.domain
       );
       if (serviceIdx > -1) {
         const service = this._services[serviceIdx];
         service.stop(() => resolve());
-        this._services = [
-          ...this._services.slice(0, serviceIdx),
-          ...this._services.slice(serviceIdx + 1),
-        ];
+        this._services = [...this._services.slice(0, serviceIdx), ...this._services.slice(serviceIdx + 1)];
       } else {
         resolve();
       }
     });
   }
   stop(): Promise<void> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this._bonjour.unpublishAll(() => resolve());
     });
   }
-  async watch(
-    request: ZeroConfWatchRequest,
-    callback?: ZeroConfWatchCallback,
-  ): Promise<CallbackID> {
+  async watch(request: ZeroConfWatchRequest, callback?: ZeroConfWatchCallback): Promise<CallbackID> {
     if (callback != null) {
-      throw new Error(
-        `You cannot use callback in electron. Please subscribe to discover events`,
-      );
+      throw new Error(`You cannot use callback in electron. Please subscribe to discover events`);
     }
-    return new Promise<CallbackID>(resolve => {
+    return new Promise<CallbackID>((resolve) => {
       const search = request.type.split('.');
       const type = search[0].replace(/^_/, '');
       const protocol = search.length > 1 ? search[1].replace(/^_/, '') : 'tcp';
       const browser = this._bonjour.find({ type, protocol });
       const id = `${callbackId++}`;
-      browser.on('up', service =>
+      browser.on('up', (service) =>
         this.emit('discover', {
           action: 'added',
           service: bonjourToZeroConfService(service),
-        }),
+        })
       );
-      browser.on('down', service =>
+      browser.on('down', (service) =>
         this.emit('discover', {
           action: 'removed',
           service: bonjourToZeroConfService(service),
-        }),
+        })
       );
       this._browsers[id] = { request, browser };
-      browser.services.forEach(service => {
+      browser.services.forEach((service) => {
         this.emit('discover', {
           action: 'added',
           service: bonjourToZeroConfService(service),
@@ -141,8 +126,8 @@ export class ZeroConf extends EventEmitter implements ZeroConfPlugin {
     });
   }
   unwatch(request: ZeroConfUnwatchRequest): Promise<void> {
-    return new Promise<void>(resolve => {
-      const browserId = Object.keys(this._browsers).find(id => {
+    return new Promise<void>((resolve) => {
+      const browserId = Object.keys(this._browsers).find((id) => {
         const { domain, type } = this._browsers[id].request;
         return domain === request.domain && type === request.type;
       });

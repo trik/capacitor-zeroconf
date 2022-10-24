@@ -32,7 +32,7 @@ export class ZeroConfWeb extends WebPlugin implements ZeroConfPlugin {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _request: ZeroConfWatchRequest,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    _callback: ZeroConfWatchCallback,
+    _callback: ZeroConfWatchCallback
   ): Promise<CallbackID> {
     return errorFn;
   }
