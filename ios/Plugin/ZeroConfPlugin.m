@@ -8,7 +8,7 @@ CAP_PLUGIN(ZeroConfPlugin, "ZeroConf",
            CAP_PLUGIN_METHOD(register, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(unregister, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(stop, CAPPluginReturnPromise);
-           CAP_PLUGIN_METHOD(watch, CAPPluginReturnPromise);
+           CAP_PLUGIN_METHOD(watch, CAPPluginReturnCallback);
            CAP_PLUGIN_METHOD(unwatch, CAPPluginReturnPromise);
 )
 
