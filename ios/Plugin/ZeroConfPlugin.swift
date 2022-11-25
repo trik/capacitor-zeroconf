@@ -88,6 +88,7 @@ public class ZeroConfPlugin: CAPPlugin {
     }
 
     @objc func watch(_ call: CAPPluginCall) {
+        call.keepAlive = true
         let typeParam = call.getString("type")
         let domainParam = call.getString("domain")
 
