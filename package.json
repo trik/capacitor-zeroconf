@@ -45,8 +45,8 @@
     "prettier": "prettier \"**/*.{css,html,ts,js,java}\"",
     "swiftlint": "node-swiftlint",
     "docgen": "docgen --api ZeroConfPlugin --output-readme README.md --output-json dist/docs.json",
-    "build": "yarn clean && yarn docgen && tsc && rollup -c rollup.config.js && yarn build-electron",
-    "build-electron": "tsc --project electron/tsconfig.json && rollup -c electron/rollup.config.js && rimraf ./electron/build",
+    "build": "yarn clean && yarn docgen && tsc && rollup -c rollup.config.mjs && yarn build-electron",
+    "build-electron": "tsc --project electron/tsconfig.json && rollup -c electron/rollup.config.mjs && rimraf ./electron/build",
     "clean": "rimraf ./dist",
     "watch": "tsc --watch",
     "prepublishOnly": "yarn build"
@@ -65,7 +65,7 @@
     "prettier": "^3.0.0",
     "prettier-plugin-java": "^2.2.0",
     "rimraf": "^5.0.1",
-    "rollup": "^2.32.0",
+    "rollup": "^3.26.2",
     "swiftlint": "^1.0.1",
     "typescript": "~4.9.5"
   },
