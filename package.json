@@ -60,6 +60,8 @@
     "@ionic/prettier-config": "^3.1.0",
     "@ionic/swiftlint-config": "^1.1.2",
     "@types/bonjour": "^3.5.10",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
     "bonjour": "^3.5.0",
     "eslint": "^8.44.0",
     "prettier": "^3.0.0",
@@ -73,8 +75,11 @@
     "@capacitor/core": "^5.0.0",
     "bonjour": "^3.5.0"
   },
-  "prettier": "@ionic/prettier-config",
   "swiftlint": "@ionic/swiftlint-config",
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint"]
+  },
   "capacitor": {
     "ios": {
       "src": "ios"
