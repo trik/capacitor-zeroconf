@@ -57,20 +57,18 @@ public class ZeroConfPlugin extends Plugin {
         final String addressFamily = call.getString("addressFamily");
 
         getBridge()
-            .executeOnMainThread(
-                () -> {
-                    try {
-                        ServiceInfo service = implementation.registerService(type, domain, name, port, props, addressFamily);
-                        JSObject status = new JSObject();
-                        status.put("action", "registered");
-                        status.put("service", jsonifyService(service));
+            .executeOnMainThread(() -> {
+                try {
+                    ServiceInfo service = implementation.registerService(type, domain, name, port, props, addressFamily);
+                    JSObject status = new JSObject();
+                    status.put("action", "registered");
+                    status.put("service", jsonifyService(service));
 
-                        call.resolve(status);
-                    } catch (IOException | RuntimeException e) {
-                        call.reject(e.getMessage());
-                    }
+                    call.resolve(status);
+                } catch (IOException | RuntimeException e) {
+                    call.reject(e.getMessage());
                 }
-            );
+            });
     }
 
     @PluginMethod
@@ -80,26 +78,22 @@ public class ZeroConfPlugin extends Plugin {
         final String name = call.getString("name");
 
         getBridge()
-            .executeOnMainThread(
-                () -> {
-                    implementation.unregisterService(type, domain, name);
-                    call.resolve();
-                }
-            );
+            .executeOnMainThread(() -> {
+                implementation.unregisterService(type, domain, name);
+                call.resolve();
+            });
     }
 
     @PluginMethod
     public void stop(PluginCall call) {
         getBridge()
-            .executeOnMainThread(
-                () -> {
-                    try {
-                        implementation.stop();
-                    } catch (IOException e) {
-                        call.reject("Error: " + e.getMessage());
-                    }
+            .executeOnMainThread(() -> {
+                try {
+                    implementation.stop();
+                } catch (IOException e) {
+                    call.reject("Error: " + e.getMessage());
                 }
-            );
+            });
     }
 
     @PluginMethod(returnType = PluginMethod.RETURN_CALLBACK)
@@ -109,27 +103,25 @@ public class ZeroConfPlugin extends Plugin {
         final String addressFamily = call.getString("addressFamily");
 
         getBridge()
-            .executeOnMainThread(
-                () -> {
-                    try {
-                        implementation.watchService(
-                            type,
-                            domain,
-                            addressFamily,
-                            (action, service) -> {
-                                JSObject status = new JSObject();
-                                status.put("action", action);
-                                status.put("service", jsonifyService(service));
+            .executeOnMainThread(() -> {
+                try {
+                    implementation.watchService(
+                        type,
+                        domain,
+                        addressFamily,
+                        (action, service) -> {
+                            JSObject status = new JSObject();
+                            status.put("action", action);
+                            status.put("service", jsonifyService(service));
 
-                                call.setKeepAlive(true);
-                                call.resolve(status);
-                            }
-                        );
-                    } catch (IOException | RuntimeException e) {
-                        call.reject("Error: " + e.getMessage());
-                    }
+                            call.setKeepAlive(true);
+                            call.resolve(status);
+                        }
+                    );
+                } catch (IOException | RuntimeException e) {
+                    call.reject("Error: " + e.getMessage());
                 }
-            );
+            });
 
         call.setKeepAlive(true);
         call.resolve();
@@ -141,27 +133,23 @@ public class ZeroConfPlugin extends Plugin {
         final String domain = call.getString("domain");
 
         getBridge()
-            .executeOnMainThread(
-                () -> {
-                    implementation.unwatchService(type, domain);
-                    call.resolve();
-                }
-            );
+            .executeOnMainThread(() -> {
+                implementation.unwatchService(type, domain);
+                call.resolve();
+            });
     }
 
     @PluginMethod
     public void close(PluginCall call) {
         getBridge()
-            .executeOnMainThread(
-                () -> {
-                    try {
-                        implementation.close();
-                        call.resolve();
-                    } catch (IOException e) {
-                        call.reject("Error: " + e.getMessage());
-                    }
+            .executeOnMainThread(() -> {
+                try {
+                    implementation.close();
+                    call.resolve();
+                } catch (IOException e) {
+                    call.reject("Error: " + e.getMessage());
                 }
-            );
+            });
     }
 
     private static JSObject jsonifyService(ServiceInfo service) {
