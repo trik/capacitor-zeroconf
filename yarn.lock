@@ -134,10 +134,10 @@
     eslint-config-prettier "^6.11.0"
     eslint-plugin-import "^2.22.0"
 
-"@ionic/prettier-config@^2.0.0":
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/@ionic/prettier-config/-/prettier-config-2.1.2.tgz#585cc1ea125088bbe634dccff311f0e045c84bd1"
-  integrity sha512-lpjXnu5XmzxDrHinjGa9z/bNe7KgXaehk6NyasyXqwzvE9EyhOSdSrkw6wS2q0HRyw8+x1GZNs2JDJ5cYq39Jw==
+"@ionic/prettier-config@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@ionic/prettier-config/-/prettier-config-3.1.0.tgz#3f99a89e5ebca47375b17af868e293963d25df4e"
+  integrity sha512-5cQ9qy9G0JDcIfUSP03EyX9ReEHK0mD34anvc2eCNpcca8GbY/wB0QS125FBkmV2DhDc5BvQSSM6VWZSGkxDJQ==
 
 "@ionic/swiftlint-config@^1.1.2":
   version "1.1.2"
