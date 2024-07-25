@@ -28,7 +28,7 @@ yarn cap sync
 
 <docgen-index>
 
-* [`addListener('discover', ...)`](#addlistenerdiscover)
+* [`addListener('discover', ...)`](#addlistenerdiscover-)
 * [`getHostname()`](#gethostname)
 * [`register(...)`](#register)
 * [`unregister(...)`](#unregister)
@@ -47,7 +47,7 @@ yarn cap sync
 ### addListener('discover', ...)
 
 ```typescript
-addListener(eventName: 'discover', listenerFunc: (result: ZeroConfWatchResult) => void) => PluginListenerHandle
+addListener(eventName: 'discover', listenerFunc: (result: ZeroConfWatchResult) => void) => Promise<PluginListenerHandle>
 ```
 
 | Param              | Type                                                                                     |
@@ -55,7 +55,7 @@ addListener(eventName: 'discover', listenerFunc: (result: ZeroConfWatchResult) =
 | **`eventName`**    | <code>'discover'</code>                                                                  |
 | **`listenerFunc`** | <code>(result: <a href="#zeroconfwatchresult">ZeroConfWatchResult</a>) =&gt; void</code> |
 
-**Returns:** <code><a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
 
 --------------------
 
