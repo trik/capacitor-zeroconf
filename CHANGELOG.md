@@ -1,3 +1,6 @@
+## [3.0.0] - 2024-07-30
+- Upgrade Capacitor to v6
+
 ## [2.0.1] - 2024-07-24
 - Fixed a bug in the iOS version when calling watch(), the callback function would not be executed when new services were discovered
 
