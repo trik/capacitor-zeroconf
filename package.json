@@ -42,7 +42,7 @@
     "lint": "yarn eslint && yarn prettier --check && yarn swiftlint lint",
     "fmt": "yarn eslint --fix && yarn prettier --write && yarn swiftlint --config .swiftlint.yml --fix --format",
     "eslint": "eslint . --ext ts",
-    "prettier": "prettier \"**/*.{css,html,ts,js,java}\"",
+    "prettier": "prettier \"**/*.{css,html,ts,js,java}\" --plugin=prettier-plugin-java",
     "swiftlint": "node-swiftlint",
     "docgen": "docgen --api ZeroConfPlugin --output-readme README.md --output-json dist/docs.json",
     "build": "yarn clean && yarn docgen && tsc && rollup -c rollup.config.mjs && yarn build-electron",
@@ -52,27 +52,27 @@
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {
-    "@capacitor/android": "^6.0.0",
-    "@capacitor/cli": "^6.0.0",
-    "@capacitor/core": "^6.0.0",
-    "@capacitor/docgen": "^0.2.0",
-    "@capacitor/ios": "^6.0.0",
-    "@ionic/prettier-config": "^3.1.0",
-    "@ionic/swiftlint-config": "^1.1.2",
+    "@capacitor/android": "^7.0.0",
+    "@capacitor/cli": "^7.0.0",
+    "@capacitor/core": "^7.0.0",
+    "@capacitor/docgen": "^0.3.0",
+    "@capacitor/ios": "^7.0.0",
+    "@ionic/prettier-config": "^4.0.0",
+    "@ionic/swiftlint-config": "^2.0.0",
     "@types/bonjour": "^3.5.10",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "bonjour": "^3.5.0",
     "eslint": "^8.44.0",
-    "prettier": "^3.0.0",
-    "prettier-plugin-java": "^2.2.0",
-    "rimraf": "^5.0.1",
-    "rollup": "^3.26.2",
-    "swiftlint": "^1.0.1",
+    "prettier": "^3.4.2",
+    "prettier-plugin-java": "^2.6.6",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.30.1",
+    "swiftlint": "^2.0.0",
     "typescript": "~4.9.5"
   },
   "peerDependencies": {
-    "@capacitor/core": "^6.0.0",
+    "@capacitor/core": ">=7.0.0",
     "bonjour": "^3.5.0"
   },
   "swiftlint": "@ionic/swiftlint-config",
@@ -92,5 +92,6 @@
     "electron": {
       "src": "electron"
     }
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
